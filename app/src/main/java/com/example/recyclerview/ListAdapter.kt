@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ListAdapter(private val activity: MainActivity):RecyclerView.Adapter<ViewHolder>() {
 
-    var models: MutableList<User> = mutableListOf()
+    private var models: MutableList<User> = mutableListOf()
 
     fun setData(data: MutableList<User>) {
         this.models = data
