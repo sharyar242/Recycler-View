@@ -3,9 +3,7 @@ package com.example.recyclerview
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
-import java.nio.file.Files.delete
 
 class ListAdapter(private val activity: MainActivity):RecyclerView.Adapter<ViewHolder>() {
 
@@ -16,6 +14,18 @@ class ListAdapter(private val activity: MainActivity):RecyclerView.Adapter<ViewH
         notifyDataSetChanged()
     }
 
+    fun onItemAdded(position: Int){
+        models.add(position,User("Title ${models.size+1}","Description ${models.size+1}"))
+        notifyItemInserted(position)
+        notifyItemRangeChanged(position,models.size)
+
+    }
+
+    fun onItemDeleted(position: Int) {
+        models.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position,models.size)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview, parent, false)
         return ViewHolder(itemView)
@@ -26,11 +36,8 @@ class ListAdapter(private val activity: MainActivity):RecyclerView.Adapter<ViewH
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.populateModels(models[position], activity, models.size, position)
+        holder.populateModels(models[position],position,activity)
     }
 
-    fun onItemDeleted(size: Int) {
-        models.removeAt(size)
-        notifyItemRemoved(size)
-    }
+
 }

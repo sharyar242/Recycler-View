@@ -32,17 +32,17 @@ class MainActivity : AppCompatActivity() {
         adapter.setData(models)
     }
 
-    fun onOptionsButtonClick(view: View,position: Int,size: Int){
+    fun onOptionsButtonClick(view: View,position: Int){
         val optionsMenu = PopupMenu(this,view)
         val menuInflater = optionsMenu.menuInflater
         menuInflater.inflate(R.menu.menu_item_options,optionsMenu.menu)
         optionsMenu.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.item_add -> {
-                    click(position)
+                    adapter.onItemAdded(position+1)
                 }
                 R.id.item_delete ->{
-                    adapter.onItemDeleted(size)
+                    adapter.onItemDeleted(position)
                 }
             }
             return@setOnMenuItemClickListener true
@@ -50,31 +50,6 @@ class MainActivity : AppCompatActivity() {
         optionsMenu.show()
     }
 
-    fun itemOnClicked(position: Int, size: Int){
-        clicked(position,size)
-    }
-    
-    private fun clicked (size: Int, position: Int) {
-        val models: MutableList<User> = mutableListOf()
-        for (i in 0 until position+size+1) {
-            val model: User = User()
-            model.title = "Title ${i+1}"
-            model.description = "Description ${i+1} "
-            models.add(model)
-        }
-        adapter.setData(models)
-    }
-
-    private fun click (position: Int ) {
-        val models: MutableList<User> = mutableListOf()
-        for (i in 0 until position+1) {
-            val model: User = User()
-            model.title = "Title ${i+1}"
-            model.description = "Description ${i+1} "
-            models.add(model)
-        }
-        adapter.setData(models)
-    }
 
 
 
