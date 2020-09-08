@@ -10,7 +10,7 @@ class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView){
     private val tvTitle : TextView = itemView.tvTitle
     private val tvDescription : TextView =  itemView.tvDescription
 
-    fun populateModels(user: User, position: Int, activity: MainActivity){
+    fun populateModels(user: User, position: Int, activity: MainActivity ){
         tvTitle.text = user.title
         tvDescription.text = user.description
         itemView.btnOptions.setOnClickListener {
